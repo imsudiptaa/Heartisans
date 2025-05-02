@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heartisans - About Our Mission</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f7f4;
+      color: #333;
+    }
+    
+    header {
+      background-color: #fff;
+      padding: 15px 5%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #e07a5f;
+    }
+    
+    .logo-icon {
+      margin-right: 10px;
+      color: #e07a5f;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 30px;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    nav ul li a:hover {
+      color: #e07a5f;
+    }
+    
+    nav ul li a.active {
+      color: #e07a5f;
+      border-bottom: 2px solid #e07a5f;
+      padding-bottom: 5px;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #e07a5f;
+      color: #e07a5f;
+    }
+    
+    .btn-outline:hover {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #cc6b52;
+      transform: translateY(-2px);
+    }
+    
+    .hero-about {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/800') center/cover no-repeat;
+      color: white;
+      text-align: center;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    
+    .hero-about h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .hero-about p {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin: 60px 0 30px;
+      font-size: 2.2rem;
+      color: #333;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      margin: -10px 0 50px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1.1rem;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .mission-section {
+      padding: 60px 10%;
+      background-color: white;
+    }
+    
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+    
+    .mission-item {
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .mission-icon {
+      font-size: 50px;
+      color: #e07a5f;
+      margin-bottom: 20px;
+    }
+    
+    .mission-title {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .mission-text {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .story-section {
+      padding: 60px 10%;
+      background-color: #f0ebe1;
+    }
+    
+    .story-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+      margin-top: 40px;
+    }
+    
+    .story-text {
+      flex: 1;
+      min-width: 300px;
+    }
+    
+    .story-text p {
+      margin-bottom: 20px;
+      line-height: 1.7;
+      color: #555;
+    }
+    
+    .story-image {
+      flex: 1;
+      min-width: 300px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .story-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .impact-section {
+      padding: 60px 10%;
+      background-color: white;
+    }
+    
+    .impact-stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 50px;
+      margin: 40px 0;
+    }
+    
+    .stat-item {
+      text-align: center;
+      width: 200px;
+    }
+    
+    .stat-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #e07a5f;
+      margin-bottom: 10px;
+    }
+    
+    .stat-label {
+      color: #555;
+      font-size: 1.1rem;
+    }
+    
+    .team-section {
+      padding: 60px 10%;
+      background-color: #f9f7f4;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .team-member {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .member-photo {
+      height: 250px;
+      background-color: #ddd;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .member-info {
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .member-name {
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+    }
+    
+    .member-title {
+      color: #e07a5f;
+      font-weight: 500;
+      margin-bottom: 15px;
+    }
+    
+    .member-bio {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    
+    .member-social {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    
+    .social-icon {
+      color: #555;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+    
+    .social-icon:hover {
+      color: #e07a5f;
+    }
+    
+    .partners-section {
+      padding: 60px 10%;
+      background-color: white;
+      text-align: center;
+    }
+    
+    .partners-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+    
+    .partner-logo {
+      width: 150px;
+      height: 80px;
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+    }
+    
+    .partner-logo:hover {
+      transform: scale(1.05);
+    }
+    
+    .cta-section {
+      background: linear-gradient(to right, rgba(224, 122, 95, 0.9), rgba(224, 122, 95, 0.7)), url('/api/placeholder/1200/400') center/cover no-repeat;
+      color: white;
+      padding: 60px 10%;
+      text-align: center;
+      margin: 60px 0;
+    }
+    
+    .cta-title {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .cta-text {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+    
+    .btn-white {
+      background: white;
+      color: #e07a5f;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      margin: 0 10px;
+    }
+    
+    .btn-white:hover {
+      background: #f9f9f9;
+      transform: translateY(-2px);
+    }
+    
+    footer {
+      background: #333;
+      color: white;
+      padding: 50px 5% 30px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-heading {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #e07a5f;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .hero-about h1 {
+        font-size: 2.5rem;
+      }
+      
+      nav ul {
+        display: none;
+      }
+      
+      .story-content {
+        flex-direction: column-reverse;
+      }
+      
+      .cta-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+        <span class="logo-icon">
+          <img src="Logo.png" style="width: 100px;">
+        </span> Heartisans
+      </div>
+    <nav>
+      <ul>
+        <li><a href="heartisans-homepage.html">Home</a></li>
+        <li><a href="heartisans-product-listing.html">Shop</a></li>
+        <li><a href="auction-detail-page.html">Auctions</a></li>
+        <li><a href="heartisans-resale.html">Resale</a></li>
+        <li><a href="heartisans-about.html" class="active">About</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+        <button class="btn btn-outline" onclick="location.href='login-page.html'">Log In</button>
+        <button class="btn btn-primary" onclick="location.href='signup-page.html'">Sign Up</button>
+
+    </div>
+  </header>
+
+  <section class="hero-about">
+    <div class="hero-content">
+      <h1>Our Mission & Vision</h1>
+      <p>We believe in the power of human creativity, sustainable commerce, and global connection to transform lives and preserve cultural heritage.</p>
+    </div>
+  </section>
+
+  <section class="mission-section">
+    <h2 class="section-title">What We Stand For</h2>
+    <p class="section-subtitle">At Heartisans, we're building a marketplace that honors craftsmanship, empowers artisans, and connects conscious consumers with authentic handcrafted treasures.</p>
+    
+    <div class="mission-grid">
+      <div class="mission-item">
+        <div class="mission-icon">🌏</div>
+        <h3 class="mission-title">Cultural Preservation</h3>
+        <p class="mission-text">We celebrate and help preserve traditional craftsmanship and cultural heritage from communities around the world.</p>
+      </div>
+      <div class="mission-item">
+        <div class="mission-icon">💪</div>
+        <h3 class="mission-title">Artisan Empowerment</h3>
+        <p class="mission-text">We provide artisans with fair compensation, global market access, and tools to grow their sustainable businesses.</p>
+      </div>
+      <div class="mission-item">
+        <div class="mission-icon">♻️</div>
+        <h3 class="mission-title">Sustainable Commerce</h3>
+        <p class="mission-text">We promote ethical production and consumption through our marketplace, resale platform, and circular economy initiatives.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="story-section">
+    <h2 class="section-title">Our Story</h2>
+    <div class="story-content">
+      <div class="story-text">
+        <p>Heartisans began in 2022 when our founder, Vihaan Desai, traveled across rural India meeting skilled artisans who struggled to find markets for their exceptional handcrafted products. Despite creating items of remarkable quality and cultural significance, these craftspeople often earned less than fair wages due to exploitative middlemen and limited market access.</p>
+        
+        <p>Inspired by their resilience and creativity, Vihaan envisioned a platform that would directly connect these artisans to global markets while ensuring authenticity, fair compensation, and sustainability. With a background in technology and a passion for cultural preservation, he assembled a team of experts in AI, e-commerce, and sustainable development.</p>
+        
+        <p>Today, Heartisans has grown from a small startup to a global marketplace representing over 2,500 artisans from 45 countries. We've pioneered innovative features like AI-powered authentication, a sustainable resale marketplace, and verified auction platforms that ensure the continued value and appreciation of handcrafted items.</p>
+        
+        <p>Our journey is just beginning as we continue to expand our community, innovate our technology, and deepen our impact across the global artisan economy.</p>
+      </div>
+      <div class="story-image">
+        <img src="nithinKamath.jpg" alt="Heartisans founder with artisans">
+      </div>

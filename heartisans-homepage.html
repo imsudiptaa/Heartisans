@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heartisans - Connecting Artisans to Global Markets</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f7f4;
+      color: #333;
+    }
+    
+    header {
+      background-color: #fff;
+      padding: 15px 5%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #e07a5f;
+    }
+    
+    .logo-icon {
+      margin-right: 10px;
+      color: #e07a5f;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 30px;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    nav ul li a:hover {
+      color: #e07a5f;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #e07a5f;
+      color: #e07a5f;
+    }
+    
+    .btn-outline:hover {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #cc6b52;
+      transform: translateY(-2px);
+    }
+    
+    .hero {
+      height: 80vh;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.7)), url('/api/placeholder/1200/800') center/cover no-repeat;
+      padding: 0 10%;
+    }
+    
+    .hero-content {
+      max-width: 500px;
+    }
+    
+    .hero-image {
+      max-width: 45%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      color: #555;
+    }
+    
+    .featured {
+      padding: 60px 5%;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.2rem;
+      color: #333;
+    }
+    
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .card-img {
+      height: 200px;
+      background-color: #ddd;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .card-content {
+      padding: 20px;
+    }
+    
+    .card-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    
+    .card-price {
+      font-weight: 700;
+      color: #e07a5f;
+      margin-bottom: 10px;
+    }
+    
+    .card-artisan {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 15px;
+    }
+    
+    .unique-features {
+      background-color: #f0ebe1;
+      padding: 60px 5%;
+      text-align: center;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .feature {
+      padding: 30px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 20px;
+      color: #e07a5f;
+    }
+    
+    .feature-title {
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+    
+    footer {
+      background: #333;
+      color: white;
+      padding: 50px 5% 30px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-heading {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #e07a5f;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    @media (max-width: 968px) {
+      .hero {
+        flex-direction: column;
+        padding: 40px 5%;
+        height: auto;
+      }
+      
+      .hero-content {
+        max-width: 100%;
+        margin-bottom: 40px;
+      }
+      
+      .hero-image {
+        max-width: 80%;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      nav ul {
+        display: none;
+      }
+      
+      .hero-image {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span class="logo-icon">
+        <img src="Logo.png" style="width: 100px;">
+      </span> Heartisans
+    </div>
+    <nav>
+      <ul>
+        <li><a href="heartisans-homepage.html">Home</a></li>
+        <li><a href="heartisans-product-listing.html">Shop</a></li>
+        <li><a href="auction-detail-page.html">Auctions</a></li>
+        <li><a href="heartisans-resale.html">Resale</a></li>
+        <li><a href="heartisans-about.html">About</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <button class="btn btn-outline" onclick="location.href='login-page.html'">Log In</button>
+      <button class="btn btn-primary" onclick="location.href='signup-page.html'">Sign Up</button>
+
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Connecting Artisans to the World</h1>
+      <p>A sustainable marketplace bridging local craftsmanship with global buyers through secure, AI-powered technology.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary">Explore Handcrafts</button>
+        <button class="btn btn-outline">Join as Artisan</button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="homePage-img.png" alt="Artisan crafting a handmade product">
+    </div>
+  </section>
+
+  <section class="featured">
+    <h2 class="section-title">Featured Creations</h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img" style="background-image: url('bamboo-basket.png')"></div>
+        <div class="card-content">
+          <h3 class="card-title">Handwoven Bamboo Basket</h3>
+          <p class="card-price">₹450.00</p>
+          <p class="card-artisan">By Rajni Devi, Assam</p>
+          <button class="btn btn-primary">View Details</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background-image: url('brass-dhokra.png')"></div>
+        <div class="card-content">
+          <h3 class="card-title">Brass Dhokra Sculpture</h3>
+          <p class="card-price">₹780</p>
+          <p class="card-artisan">By Mohan Singh, Jharkhand</p>
+          <button class="btn btn-primary">View Details</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background-image: url('clay-pot.png')"></div>
+        <div class="card-content">
+          <h3 class="card-title">Hand-painted Clay Pottery</h3>
+          <p class="card-price">₹350</p>
+          <p class="card-artisan">By Priya Sharma, Rajasthan</p>
+          <button class="btn btn-primary">View Details</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background-image: url('wall-hanging.png')"></div>
+        <div class="card-content">
+          <h3 class="card-title">Embroidered Wall Hanging</h3>
+          <p class="card-price">₹250</p>
+          <p class="card-artisan">By Fatima Begum, Gujarat</p>
+          <button class="btn btn-primary">View Details</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="unique-features">
+    <h2 class="section-title">What Makes Us Different</h2>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">🔍</div>
+        <h3 class="feature-title">AI-Powered Authenticity</h3>
+        <p>Our AI verifies and authenticates each product, ensuring genuine handcrafted quality.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔄</div>
+        <h3 class="feature-title">Sustainable Resale</h3>
+        <p>Give handcrafted items a second life through our secure resale marketplace.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔨</div>
+        <h3 class="feature-title">Verified Auctions</h3>
+        <p>Bid on rare, unique pieces directly from artisans with our secure auction system.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <h2 class="section-title">Live Auctions</h2>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-img" style="background-image: url('wooden-sculpture.png')"></div>
+        <div class="card-content">
+          <h3 class="card-title">Antique Wooden Sculpture</h3>
+          <p class="card-price">Current Bid: ₹12000</p>
+          <p class="card-artisan">Ends in: 2d 14h 35m</p>
+          <button class="btn btn-primary">Place Bid</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background-image: url('chess-set.png')"></div>
+        <div class="card-content">
+          <h3 class="card-title">Hand-carved Chess Set</h3>
+          <p class="card-price">Current Bid: ₹45000</p>
+          <p class="card-artisan">Ends in: 1d 8h 15m</p>
+          <button class="btn btn-primary">Place Bid</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background-image: url('jewelry-box.png')"></div>
+        <div class="card-content">
+          <h3 class="card-title">Silver Filigree Jewelry Box</h3>
+          <p class="card-price">Current Bid: ₹210000</p>
+          <p class="card-artisan">Ends in: 4h 22m</p>
+          <button class="btn btn-primary">Place Bid</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img" style="background-image: url('vintage-silk.png')"></div>
+        <div class="card-content">
+          <h3 class="card-title">Vintage Silk Tapestry</h3>
+          <p class="card-price">Current Bid: ₹150000</p>
+          <p class="card-artisan">Ends in: 12h 40m</p>
+          <button class="btn btn-primary">Place Bid</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3 class="footer-heading">Heartisans</h3>
+        <p>Connecting artisans with global buyers while promoting sustainability and cultural heritage.</p>
+      </div>
+      <div>
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="heartisans-homepage.html">Home</a></li>
+          <li><a href="heartisans-product-listing.html">Shop</a></li>
+          <li><a href="auction-detail-page.html">Auctions</a></li>
+          <li><a href="heartisans-resale.html">Resale</a></li>
+          <li><a href="heartisans-about.html">About</a></li>
+          <li><a href="#">Become a Seller</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-heading">Help</h3>
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Product Authenticity</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-heading">Subscribe</h3>
+        <p>Join our newsletter for updates on new artisans, products, and auctions.</p>
+        <form>
+          <input type="email" placeholder="Your email" style="padding: 10px; width: 100%; margin-top: 10px; border-radius: 5px; border: none;">
+          <button class="btn btn-primary" style="margin-top: 10px; width: 100%;">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Heartisans. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

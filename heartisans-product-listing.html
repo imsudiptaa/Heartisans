@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop Handcrafted Items - Heartisans</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f7f4;
+      color: #333;
+    }
+    
+    header {
+      background-color: #fff;
+      padding: 15px 5%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #e07a5f;
+    }
+    
+    .logo-icon {
+      margin-right: 10px;
+      color: #e07a5f;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 30px;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    nav ul li a:hover {
+      color: #e07a5f;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #e07a5f;
+      color: #e07a5f;
+    }
+    
+    .btn-outline:hover {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #cc6b52;
+      transform: translateY(-2px);
+    }
+    
+    .shop-container {
+      display: flex;
+      padding: 40px 5%;
+      gap: 30px;
+    }
+    
+    .filters {
+      width: 250px;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      align-self: flex-start;
+      position: sticky;
+      top: 100px;
+    }
+    
+    .filter-heading {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .filter-section {
+      margin-bottom: 25px;
+    }
+    
+    .filter-title {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    
+    .range-slider {
+      width: 100%;
+      margin: 10px 0;
+    }
+    
+    .range-values {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .product-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .product-img {
+      height: 200px;
+      background-color: #ddd;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    
+    .authenticity-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .product-details {
+      padding: 15px;
+    }
+    
+    .product-title {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    
+    .product-price {
+      font-weight: 700;
+      color: #e07a5f;
+      margin-bottom: 8px;
+    }
+    
+    .product-artisan {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      color: #888;
+      font-size: 0.85rem;
+      margin-bottom: 15px;
+    }
+    
+    .product-origin, .product-material {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .product-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .btn-sm {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    
+    .page-item {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .page-item:hover, .page-item.active {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    footer {
+      background: #333;
+      color: white;
+      padding: 50px 5% 30px;
+      margin-top: 60px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-heading {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #e07a5f;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .shop-container {
+        flex-direction: column;
+      }
+      
+      .filters {
+        width: 100%;
+        position: static;
+        margin-bottom: 20px;
+      }
+      
+      nav ul {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span class="logo-icon">
+        <img src="Logo.png" style="width: 100px;">
+      </span> Heartisans
+    </div>
+    <nav>
+      <ul>
+        <li><a href="heartisans-homepage.html">Home</a></li>
+        <li><a href="heartisans-product-listing.html">Shop</a></li>
+        <li><a href="auction-detail-page.html">Auctions</a></li>
+        <li><a href="heartisans-resale.html">Resale</a></li>
+        <li><a href="heartisans-about.html">About</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <button class="btn btn-outline" onclick="location.href='login-page.html'">Log In</button>
+      <button class="btn btn-primary" onclick="location.href='signup-page.html'">Sign Up</button>
+      
+    </div>
+  </header>
+
+  <main>
+    <div class="shop-container">
+      <aside class="filters">
+        <h2 class="filter-heading">Filters</h2>
+        
+        <div class="filter-section">
+          <h3 class="filter-title">Categories</h3>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" checked> Pottery & Ceramics
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> Textiles & Fabrics
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> Wood Carvings
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> Metal & Brass Work
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> Jewelry
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> Paintings
+            </label>
+          </div>
+        </div>
+        
+        <div class="filter-section">
+          <h3 class="filter-title">Price Range</h3>
+          <input type="range" min="0" max="500" value="200" class="range-slider">
+          <div class="range-values">
+            <span>$0</span>
+            <span>$500</span>
+          </div>
+        </div>
+        
+        <div class="filter-section">
+          <h3 class="filter-title">Region</h3>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox"> North India
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> South India
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> East India
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> West India
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> Northeast India
+            </label>
+          </div>
+        </div>
+        
+        <div class="filter-section">
+          <h3 class="filter-title">Materials</h3>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox"> Clay
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> Wood
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> Metal
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> Fabric
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox"> Bamboo
+            </label>
+          </div>
+        </div>
+        
+        <button class="btn btn-primary" style="width: 100%;">Apply Filters</button>
+      </aside>
+      
+      <div>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-img" style="background-image: url('blue-pot.png')">
+              <div class="authenticity-badge">
+                <span>✓</span> Verified Authentic
+              </div>
+            </div>
+            <div class="product-details">
+              <h3 class="product-title">Blue Pottery Vase</h3>
+              <p class="product-price">₹850</p>
+              <p class="product-artisan">By Arjun Kumar, Jaipur</p>
+              <div class="product-meta">
+                <span class="product-origin">📍 Rajasthan</span>
+                <span class="product-material">🧱 Quartz Clay</span>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-sm" style="flex: 1;">Add to Cart</button>
+                <button class="btn btn-outline btn-sm" onclick="location.href='product-detail-page.html'">View</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-img" style="background-image: url('scarf.png')">
+              <div class="authenticity-badge">
+                <span>✓</span> Verified Authentic
+              </div>
+            </div>
+            <div class="product-details">
+              <h3 class="product-title">Handwoven Silk Scarf</h3>
+              <p class="product-price">₹450</p>
+              <p class="product-artisan">By Lakshmi Devi, Varanasi</p>
+              <div class="product-meta">
+                <span class="product-origin">📍 Uttar Pradesh</span>
+                <span class="product-material">🧵 Pure Silk</span>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-sm" style="flex: 1;">Add to Cart</button>
+                <button class="btn btn-outline btn-sm">♡</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="product-card">
+            <div class="product-img" style="background-image: url('dhokra-horse.png')">
+              <div class="authenticity-badge">
+                <span>✓</span> Verified Authentic
+              </div>
+            </div>
+            <div class="product-details">
+              <h3 class="product-title">Dhokra Horse Figurine</h3>
+              <p class="product-price">₹850</p>
+              <p class="product-artisan">By Ramesh Mahto, Chattisgarh</p>
+              <div class="product-meta">
+                <span class="product-origin">📍 Central India</span>
+                <span class="product-material">🔶 Brass</span>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-sm" style="flex: 1;">Add to Cart</button>
+                <button class="btn btn-outline btn-sm">♡</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- <div class="product-card">
+            <div class="product-img" style="background-image: url('/api/placeholder/300/200')">
+              <div class="authenticity-badge">
+                <span>✓</span> Verified Authentic
+              </div>
+            </div>
+            <div class="product-details">
+              <h3 class="product-title">Handpainted Wall Plate</h3>
+              <p class="product-price">$55.00</p>
+              <p class="product-artisan">By Maya Kumari, Karnataka</p>
+              <div class="product-meta">
+                <span class="product-origin">📍 South India</span>
+                <span class="product-material">🧱 Terracotta</span>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-sm" style="flex: 1;">Add to Cart</button>
+                <button class="btn btn-outline btn-sm">♡</button>
+              </div>
+            </div>
+          </div> -->
+          
+          <!-- <div class="product-card">
+            <div class="product-img" style="background-image: url('/api/placeholder/300/200')">
+              <div class="authenticity-badge">
+                <span>✓</span> Verified Authentic
+              </div>
+            </div>
+            <div class="product-details">
+              <h3 class="product-title">Carved Wooden Elephant</h3>
+              <p class="product-price">$120.00</p>
+              <p class="product-artisan">By Vijay Sharma, Kerala</p>
+              <div class="product-meta">
+                <span class="product-origin">📍 South India</span>
+                <span class="product-material">🪵 Rosewood</span>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-sm" style="flex: 1;">Add to Cart</button>
+                <button class="btn btn-outline btn-sm">♡</button>
+              </div>
+            </div> -->
+          <!-- </div> -->
+          
+          <!-- <div class="product-card"> -->
+            <!-- <div class="product-img" style="background-image: url('/api/placeholder/300/200')">
+              <div class="authenticity-badge">
+                <span>✓</span> Verified Authentic
+              </div>
+            </div>
+            <div class="product-details">
+              <h3 class="product-title">Embroidered Cushion Cover</h3>
+              <p class="product-price">$35.00</p>
+              <p class="product-artisan">By Sarla Ben, Gujarat</p>
+              <div class="product-meta">
+                <span class="product-origin">📍 West India</span>
+                <span class="product-material">🧵 Cotton</span>
+              </div>
+              <div class="product-actions">
+                <button class="btn btn-primary btn-sm" style="flex: 1;">Add to Cart</button>
+                <button class="btn btn-outline btn-sm">♡</button>
+              </div> -->
+            <!-- </div> -->
+          </div>
+        </div>
+        
+        <div class="pagination">
+          <div class="page-item">1</div>
+          <div class="page-item active">2</div>
+          <div class="page-item">3</div>
+          <div class="page-item">4</div>
+          <div class="page-item">»</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3 class="footer-heading">Heartisans</h3>
+        <p>Connecting artisans with global buyers while promoting sustainability and cultural heritage.</p>
+      </div>
+      <div>
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Auctions</a></li>
+          <li><a href="#">Resale</a></li>
+          <li><a href="#">Become a Seller</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-heading">Help</h3>
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Product Authenticity</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-heading">Subscribe</h3>
+        <p>Join our newsletter for updates on new artisans, products, and auctions.</p>
+        <form>
+          <input type="email" placeholder="Your email" style="padding: 10px; width: 100%; margin-top: 10px; border-radius: 5px; border: none;">
+          <button class="btn btn-primary" style="margin-top: 10px; width: 100%;">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Heartisans. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>

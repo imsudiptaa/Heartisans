@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heartisans - Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f7f4;
+      color: #333;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    header {
+      background-color: #fff;
+      padding: 15px 5%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #e07a5f;
+    }
+    
+    .logo-icon {
+      margin-right: 10px;
+      color: #e07a5f;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 30px;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    nav ul li a:hover {
+      color: #e07a5f;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #e07a5f;
+      color: #e07a5f;
+    }
+    
+    .btn-outline:hover {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #cc6b52;
+      transform: translateY(-2px);
+    }
+    
+    .login-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    
+    .login-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 450px;
+      padding: 40px;
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .login-header h1 {
+      color: #333;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    
+    .login-header p {
+      color: #666;
+      font-size: 1rem;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #444;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+    
+    .form-group input:focus {
+      border-color: #e07a5f;
+      outline: none;
+    }
+    
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      font-size: 0.9rem;
+    }
+    
+    .remember-me {
+      display: flex;
+      align-items: center;
+    }
+    
+    .remember-me input {
+      margin-right: 8px;
+    }
+    
+    .forgot-password {
+      color: #e07a5f;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .forgot-password:hover {
+      color: #cc6b52;
+      text-decoration: underline;
+    }
+    
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 6px;
+      font-size: 1rem;
+      margin-bottom: 25px;
+    }
+    
+    .social-login {
+      text-align: center;
+    }
+    
+    .social-login p {
+      color: #666;
+      margin-bottom: 15px;
+      position: relative;
+    }
+    
+    .social-login p::before,
+    .social-login p::after {
+      content: "";
+      display: block;
+      width: 30%;
+      height: 1px;
+      background: #ddd;
+      position: absolute;
+      top: 50%;
+    }
+    
+    .social-login p::before {
+      left: 0;
+    }
+    
+    .social-login p::after {
+      right: 0;
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .social-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background-color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .social-icon:hover {
+      background-color: #e8e8e8;
+      transform: translateY(-2px);
+    }
+    
+    .signup-link {
+      text-align: center;
+      margin-top: 20px;
+      color: #666;
+    }
+    
+    .signup-link a {
+      color: #e07a5f;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .signup-link a:hover {
+      color: #cc6b52;
+      text-decoration: underline;
+    }
+    
+    footer {
+      background: #333;
+      color: white;
+      padding: 20px 5%;
+      text-align: center;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .footer-links {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 0.9rem;
+    }
+    
+    .footer-links a:hover {
+      color: #e07a5f;
+    }
+    
+    .copyright {
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+      }
+      
+      .login-card {
+        padding: 30px 20px;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .footer-links {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+        <span class="logo-icon">
+          <img src="Logo.png" style="width: 100px;">
+        </span> Heartisans
+      </div>
+    <nav>
+      <ul>
+        <li><a href="heartisans-homepage.html">Home</a></li>
+        <li><a href="heartisans-product-listing.html">Shop</a></li>
+        <li><a href="auction-detail-page.html">Auctions</a></li>
+        <li><a href="heartisans-resale.html">Resale</a></li>
+        <li><a href="heartisans-about.html">About</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+        <button class="btn btn-outline" onclick="location.href='login-page.html'">Log In</button>
+        <button class="btn btn-primary" onclick="location.href='signup-page.html'">Sign Up</button>
+
+    </div>
+  </header>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <h1>Welcome Back</h1>
+        <p>Sign in to access your Heartisans account</p>
+      </div>
+      
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        
+        <div class="remember-forgot">
+          <div class="remember-me">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Remember me</label>
+          </div>
+          <a href="#" class="forgot-password">Forgot Password?</a>
+        </div>
+        
+        <button type="submit" class="btn btn-primary login-btn">Log In</button>
+      </form>
+      
+      <div class="social-login">
+        <p>Or sign in with</p>
+        <div class="social-icons">
+          <div class="social-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#4267B2">
+              <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0014.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"></path>
+            </svg>
+          </div>
+          <div class="social-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#1DA1F2">
+              <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path>
+            </svg>
+          </div>
+          <div class="social-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#DB4437">
+              <path d="M12.48 10.92v3.28h4.92c-.2 1.28-1.52 3.76-4.92 3.76-2.96 0-5.36-2.46-5.36-5.5s2.4-5.5 5.36-5.5c1.68 0 2.81.72 3.45 1.34l2.36-2.28c-1.51-1.41-3.48-2.26-5.81-2.26-4.8 0-8.7 3.9-8.7 8.7s3.9 8.7 8.7 8.7c5.02 0 8.36-3.53 8.36-8.49 0-.57-.07-1.13-.15-1.65h-8.21z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      
+      <div class="signup-link">
+        <p>Don't have an account? <a href="signup-psge.html">Sign up now</a></p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="copyright">
+        © 2025 Heartisans. All rights reserved.
+      </div>
+      <ul class="footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

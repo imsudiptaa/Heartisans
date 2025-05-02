@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blue Pottery Vase - Heartisans</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f7f4;
+      color: #333;
+    }
+    
+    header {
+      background-color: #fff;
+      padding: 15px 5%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #e07a5f;
+    }
+    
+    .logo-icon {
+      margin-right: 10px;
+      color: #e07a5f;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 30px;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    nav ul li a:hover {
+      color: #e07a5f;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #e07a5f;
+      color: #e07a5f;
+    }
+    
+    .btn-outline:hover {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #cc6b52;
+      transform: translateY(-2px);
+    }
+    
+    .product-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 40px;
+    }
+    
+    .product-images {
+      flex: 1;
+    }
+    
+    .main-image {
+      width: 100%;
+      height: 400px;
+      background-color: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .authenticity-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .thumbnail-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+    
+    .thumbnail {
+      height: 80px;
+      background-color: #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .thumbnail:hover {
+      transform: scale(1.05);
+    }
+    
+    .product-info {
+      flex: 1;
+    }
+    
+    .breadcrumb {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    
+    .breadcrumb a {
+      color: #888;
+      text-decoration: none;
+    }
+    
+    .breadcrumb a:hover {
+      color: #e07a5f;
+    }
+    
+    .product-title {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #e07a5f;
+      margin-bottom: 20px;
+    }
+    
+    .artisan-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .artisan-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #ddd;
+    }
+    
+    .artisan-name {
+      font-weight: 600;
+    }
+    
+    .artisan-location {
+      color: #888;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .product-meta {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .meta-label {
+      font-size: 0.9rem;
+      color: #888;
+    }
+    
+    .meta-value {
+      font-weight: 600;
+    }
+    
+    .product-description {
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      overflow: hidden;
+    }
+    
+    .qty-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    
+    .qty-input {
+      width: 50px;
+      height: 40px;
+      border: none;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .action-buttons .btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px;
+    }
+    
+    .product-accordion {
+      margin-top: 40px;
+    }
+    
+    .accordion-item {
+      border-bottom: 1px solid #eee;
+    }
+    
+    .accordion-header {
+      padding: 20px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .accordion-content {
+      padding-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .related-products {
+      padding: 60px 5%;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.2rem;
+      color: #333;
+    }
+    
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .card-img {
+      height: 200px;
+      background-color: #ddd;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .card-content {
+      padding: 20px;
+    }
+    
+    .card-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    
+    .card-price {
+      font-weight: 700;
+      color: #e07a5f;
+      margin-bottom: 10px;
+    }
+    
+    .card-artisan {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 15px;
+    }
+    
+    footer {
+      background: #333;
+      color: white;
+      padding: 50px 5% 30px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-heading {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #e07a5f;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .product-container {
+        flex-direction: column;
+      }
+      
+      nav ul {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span class="logo-icon">
+        <img src="Logo.png" style="width: 100px;">
+      </span> Heartisans
+    </div>
+    <nav>
+      <ul>
+        <li><a href="heartisans-homepage.html">Home</a></li>
+        <li><a href="heartisans-product-listing.html">Shop</a></li>
+        <li><a href="auction-detail-page.html">Auctions</a></li>
+        <li><a href="heartisans-resale.html">Resale</a></li>
+        <li><a href="heartisans-about.html">About</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <button class="btn btn-outline" onclick="location.href='login-page.html'">Log In</button>
+      <button class="btn btn-primary" onclick="location.href='signup-page.html'">Sign Up</button>
+
+    </div>
+  </header>
+
+  <main>
+    <div class="product-container">
+      <div class="product-images">
+        <div class="main-image" style="background-image: url('/api/placeholder/600/400')">
+          <div class="authenticity-badge">
+            <span>✓</span> AI-Verified Authentic
+          </div>
+        </div>
+        <div class="thumbnail-grid">
+          <div class="thumbnail" style="background-image: url('/api/placeholder/150/150')"></div>
+          <div class="thumbnail" style="background-image: url('/api/placeholder/150/150')"></div>
+          <div class="thumbnail" style="background-image: url('/api/placeholder/150/150')"></div>
+          <div class="thumbnail" style="background-image: url('/api/placeholder/150/150')"></div>
+        </div>
+      </div>
+      
+      <div class="product-info">
+        <div class="breadcrumb">
+          <a href="#">Home</a> &gt;
+          <a href="#">Shop</a> &gt;
+          <a href="#">Pottery & Ceramics</a> &gt;
+          <span>Blue Pottery Vase</span>
+        </div>
+        
+        <h1 class="product-title">Blue Pottery Vase</h1>
+        <p class="product-price">$65.00</p>
+        
+        <div class="artisan-info">
+          <div class="artisan-avatar" style="background-image: url('/api/placeholder/60/60')"></div>
+          <div>
+            <p class="artisan-name">Arjun Kumar</p>
+            <p class="artisan-location">📍 Jaipur, Rajasthan</p>
+          </div>
+        </div>
+        
+        <div class="product-meta">
+          <div class="meta-item">
+            <span class="meta-label">Material</span>
+            <span class="meta-value">Quartz Clay</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Technique</span>
+            <span class="meta-value">Traditional Blue Pottery</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Dimensions</span>
+            <span class="meta-value">8" × 5" × 5"</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Weight</span>
+            <span class="meta-value">1.2 kg</span>
+          </div>
+        </div>
+        
+        <div class="product-description">
+          <p>This exquisite Blue Pottery vase is handcrafted by master artisan Arjun Kumar from Jaipur, using traditional techniques passed down through generations. The distinctive blue and white patterns are created using natural mineral-based colors and a specialized quartz clay formula that makes it more durable than typical pottery.</p>
+          <p>Each piece is individually crafted and fired, making every vase unique in its subtle details. The intricate floral patterns reflect the rich artistic heritage of Rajasthan with a contemporary touch.</p>
+        </div>
+        
+        <div class="quantity-selector">
+          <span>Quantity:</span>
+          <div class="quantity-control">
+            <button class="qty-btn">-</button>
+            <input type="text" class="qty-input" value="1">
+            <button class="qty-btn">+</button>
+          </div>
+        </div>
+        
+        <div class="action-buttons">
+          <button class="btn btn-primary">Add to Cart</button>
+          <button class="btn btn-outline">Add to Wishlist ♡</button>
+        </div>
+        
+        <div class="product-accordion">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              Authenticity Verification
+              <span>+</span>
+            </div>
+            <div class="accordion-content">
+              <p>This product has been verified using our AI authentication system that analyzes crafting techniques, materials, and design elements. The authenticity score of 98% confirms this is a genuine handcrafted piece from the region claimed.</p>
+              <p>Certificate ID: AUTH-JP-2025-8742</p>
+            </div>
+          </div>
+          
+          <div class="accordion-item">
+            <div class="accordion-header">
+              Artisan Story
+              <span>+</span>
+            </div>
+            <div class="accordion-content">
+              <p>Arjun Kumar is a third-generation blue pottery artisan from Jaipur, Rajasthan. He learned the craft from his father at the age of 12 and has been perfecting his techniques for over two decades. His workshop employs 5 local craftspeople, helping preserve this traditional art form.</p>
+              <p>Arjun specializes in contemporary adaptations of classic designs, blending traditional patterns with modern aesthetics while staying true to authentic materials and techniques.</p>
+            </div>
+          </div>
+          
+          <div class="accordion-item">
+            <div class="accordion-header">
+              Shipping & Returns
+              <span>+</span>
+            </div>
+            <div class="accordion-content">
+              <p>Free shipping on orders over $50. Standard delivery takes 5-7 business days.</p>
+              <p>We accept returns within 14 days of delivery. Items must be unused and in original packaging. Custom and personalized items cannot be returned unless damaged.</p>
+            </div>
+          </div>
+          
+          <div class="accordion-item">
+            <div class="accordion-header">
+              Care Instructions
+              <span>+</span>
+            </div>
+            <div class="accordion-content">
+              <p>Clean with a soft, damp cloth. Avoid abrasive cleaners or harsh chemicals that may damage the glaze.</p>
+              <p>Keep away from direct sunlight for extended periods to preserve the vibrant colors.</p>
+              <p>Not suitable for holding water for extended periods or for use in microwave/dishwasher.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <section class="related-products">
+      <h2 class="section-title">You May Also Like</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-img" style="background-image: url('/api/placeholder/300/200')"></div>
+          <div class="card-content">
+            <h3 class="card-title">Blue Pottery Plate Set</h3>
+            <p class="card-price">$85.00</p>
+            <p class="card-artisan">By Arjun Kumar, Jaipur</p>
+            <button class="btn btn-primary">View Details</button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-img" style="background-image: url('/api/placeholder/300/200')"></div>
+          <div class="card-content">
+            <h3 class="card-title">Ceramic Tea Light Holder</h3>
+            <p class="card-price">$28.50</p>
+            <p class="card-artisan">By Priya Sharma, Rajasthan</p>
+            <button class="btn btn-primary">View Details</button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-img" style="background-image: url('/api/placeholder/300/200')"></div>
+          <div class="card-content">
+            <h3 class="card-title">Hand-painted Plant Pot</h3>
+            <p class="card-price">$42.00</p>
+            <p class="card-artisan">By Maya Kumari, Karnataka</p>
+            <button class="btn btn-primary">View Details</button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-img" style="background-image: url('/api/placeholder/300/200')"></div>
+          <div class="card-content">
+            <h3 class="card-title">Ceramic Wall Hanging</h3>
+            <p class="card-price">$55.00</p>
+            <p class="card-artisan">By Vikram Patel, Gujarat</p>
+            <button class="btn btn-primary">View Details</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3 class="footer-heading">Heartisans</h3>
+        <p>Connecting artisans with global buyers while promoting sustainability and cultural heritage.</p>
+      </div>
+      <div>
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Auctions</a></li>
+          <li><a href="#">Resale</a></li>
+          <li><a href="#">Become a Seller</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-heading">Help</h3>
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Product Authenticity</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer-heading">Subscribe</h3>
+        <p>Join our newsletter for updates on new artisans, products, and auctions.</p>
+        <form>
+          <input type="email" placeholder="Your email" style="padding: 10px; width: 100%; margin-top: 10px; border-radius: 5px; border: none;">
+          <button class="btn btn-primary" style="margin-top: 10px; width: 100%;">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Heartisans. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Simple accordion functionality
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', function() {
+        const content = this.nextElementSibling;
+        const isVisible = content.style.display === 'block';
+        
+        // Hide all accordion contents
+        document.querySelectorAll('.accordion-content').forEach(item => {
+          item.style.display = 'none';
+        });
+        
+        // Reset all accordion headers
+        document.querySelectorAll('.accordion-header').forEach(header => {
+          header.querySelector('span').textContent = '+';
+        });
+        
+        if (!isVisible) {
+          content.style.display = 'block';
+          this.querySelector('span').textContent = '-';
+        }
+      });
+    });
+    
+    // Initialize by showing the first accordion item
+    document.querySelector('.accordion-content').style.display = 'block';
+    document.querySelector('.accordion-header span').textContent = '-';
+    
+    // Quantity control
+    const minusBtn = document.querySelector('.qty-btn:first-child');
+    const plusBtn = document.querySelector('.qty-btn:last-child');
+    const qtyInput = document.querySelector('.qty-input');
+    
+    minusBtn.addEventListener('click', function() {
+      let qty = parseInt(qtyInput.value);
+      if (qty > 1) {
+        qtyInput.value = qty - 1;
+      }
+    });
+    
+    plusBtn.addEventListener('click', function() {
+      let qty = parseInt(qtyInput.value);
+      qtyInput.value = qty + 1;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heartisans - Sustainable Resale Marketplace</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background-color: #f9f7f4;
+      color: #333;
+    }
+    
+    header {
+      background-color: #fff;
+      padding: 15px 5%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #e07a5f;
+    }
+    
+    .logo-icon {
+      margin-right: 10px;
+      color: #e07a5f;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    
+    nav ul li {
+      margin-left: 30px;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    nav ul li a:hover {
+      color: #e07a5f;
+    }
+    
+    nav ul li a.active {
+      color: #e07a5f;
+      border-bottom: 2px solid #e07a5f;
+      padding-bottom: 5px;
+    }
+    
+    .auth-buttons {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #e07a5f;
+      color: #e07a5f;
+    }
+    
+    .btn-outline:hover {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary {
+      background: #e07a5f;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: #cc6b52;
+      transform: translateY(-2px);
+    }
+    
+    .page-banner {
+      padding: 60px 10%;
+      background: linear-gradient(to right, rgba(255,255,255,0.9), rgba(255,255,255,0.7)), url('/api/placeholder/1200/400') center/cover no-repeat;
+      text-align: center;
+    }
+    
+    .page-banner h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .page-banner p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+      color: #555;
+    }
+    
+    .filter-container {
+      background: white;
+      padding: 20px 5%;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .filter-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .filter-label {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #555;
+    }
+    
+    .filter-select {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    
+    .search-bar {
+      display: flex;
+      margin-top: 20px;
+    }
+    
+    .search-input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 30px 0 0 30px;
+      font-size: 1rem;
+    }
+    
+    .search-btn {
+      padding: 10px 20px;
+      background: #e07a5f;
+      color: white;
+      border: none;
+      border-radius: 0 30px 30px 0;
+      cursor: pointer;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin: 40px 0;
+      font-size: 2.2rem;
+      color: #333;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      margin: -20px 0 40px;
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 0 5%;
+      margin-bottom: 60px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .card-img {
+      height: 200px;
+      background-color: #ddd;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    
+    .resale-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(224, 122, 95, 0.9);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .card-content {
+      padding: 20px;
+    }
+    
+    .card-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    
+    .card-price {
+      font-weight: 700;
+      color: #e07a5f;
+      margin-bottom: 5px;
+    }
+    
+    .card-original-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    
+    .card-condition {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 5px;
+    }
+    
+    .card-seller {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 15px;
+    }
+    
+    .how-it-works {
+      background-color: #f0ebe1;
+      padding: 60px 5%;
+      text-align: center;
+    }
+    
+    .steps-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 40px;
+    }
+    
+    .step {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      width: 280px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .step-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #e07a5f;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    
+    .step-title {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+    }
+    
+    .step-description {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .testimonials {
+      padding: 60px 5%;
+      text-align: center;
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .testimonial {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      text-align: left;
+    }
+    
+    .testimonial-content {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+    
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #ddd;
+      margin-right: 15px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .author-info h4 {
+      margin-bottom: 5px;
+    }
+    
+    .author-info p {
+      color: #888;
+      font-size: 0.9rem;
+    }
+    
+    .cta-section {
+      background: linear-gradient(to right, rgba(224, 122, 95, 0.9), rgba(224, 122, 95, 0.7)), url('/api/placeholder/1200/400') center/cover no-repeat;
+      color: white;
+      padding: 60px 10%;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .cta-title {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .cta-text {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+    }
+    
+    .btn-white {
+      background: white;
+      color: #e07a5f;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+    }
+    
+    .btn-white:hover {
+      background: #f9f9f9;
+      transform: translateY(-2px);
+    }
+    
+    footer {
+      background: #333;
+      color: white;
+      padding: 50px 5% 30px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-heading {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: #e07a5f;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    /* Mobile menu styles */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #333;
+      cursor: pointer;
+    }
+    
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      overflow: auto;
+    }
+    
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 30px;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+      position: relative;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .listing-form {
+      margin-top: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    
+    .form-group textarea {
+      height: 100px;
+      resize: vertical;
+    }
+    
+    .file-upload {
+      background: #f9f7f4;
+      border: 2px dashed #ddd;
+      border-radius: 5px;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .file-upload p {
+      margin-bottom: 15px;
+      color: #666;
+    }
+    
+    @media (max-width: 768px) {
+      .page-banner h1 {
+        font-size: 2.5rem;
+      }
+      
+      nav ul {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        height: 100%;
+        background: white;
+        z-index: 200;
+        padding: 50px 20px;
+        transition: left 0.3s ease;
+      }
+      
+      .mobile-menu.active {
+        left: 0;
+      }
+      
+      .mobile-menu ul {
+        flex-direction: column;
+      }
+      
+      .mobile-menu ul li {
+        margin: 15px 0;
+      }
+      
+      .close-menu {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+      
+      .filter-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .cta-title {
+        font-size: 2rem;
+      }
+      
+      .auth-buttons {
+        display: none;
+      }
+      
+      .mobile-auth {
+        margin-top: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span class="logo-icon">
+        <img src="Logo.png" style="width: 100px;">
+      </span> Heartisans
+    </div>
+    <nav>
+      <ul>
+        <li><a href="heartisans-homepage.html">Home</a></li>
+        <li><a href="heartisans-product-listing.html">Shop</a></li>
+        <li><a href="auction-detail-page.html">Auctions</a></li>
+        <li><a href="heartisans-resale.html" class="active">Resale</a></li>
+        <li><a href="heartisans-about.html">About</a></li>
+      </ul>
+    </nav>
+    <div class="auth-buttons">
+      <button class="btn btn-outline" onclick="location.href='login-page.html'">Log In</button>
+      <button class="btn btn-primary" onclick="location.href='signup-page.html'">Sign Up</button>
+
+    </div>
+    <button class="mobile-menu-btn">☰</button>
+  </header>
+
+  <!-- Mobile Menu -->
+  <!-- <div class="mobile-menu">
+    <button class="close-menu">✕</button>
+    <ul>
+      <li><a href="heartisans-homepage.html">Home</a></li>
+      <li><a href="heartisans-product-listing.html">Shop</a></li>
+      <li><a href="auction-detail-page.html">Auctions</a></li>
+      <li><a href="heartisans-resale.html" class="active">Resale</a></li>
+      <li><a href="heartisans-about.html">About</a></li>
+    </ul>
+    <div class="mobile-auth">
+      <button class="btn btn-outline" style="width: 100%; margin-bottom: 15px;" id="mobile-login-btn">Log In</button>
+      <button class="btn btn-primary" style="width: 100%;" id="mobile-signup-btn">Sign Up</button>
+    </div>
+  </div> -->
+
+  <section class="page-banner">
+    <h1>Sustainable Resale Marketplace</h1>
+    <p>Give handcrafted artisanal items a second life while supporting ethical commerce and sustainable practices.</p>
+    <button class="btn btn-primary" id="list-item-btn">List Your Item</button>
+  </section>
+
+  <div class="filter-container">
+    <div class="filter-grid">
+      <div class="filter-group">
+        <label class="filter-label">Category</label>
+        <select class="filter-select" id="category-filter">
+          <option value="all">All Categories</option>
+          <option value="home-decor">Home Decor</option>
+          <option value="jewelry">Jewelry</option>
+          <option value="textiles">Textiles</option>
+          <option value="pottery">Pottery</option>
+          <option value="woodwork">Woodwork</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Condition</label>
+        <select class="filter-select" id="condition-filter">
+          <option value="all">All Conditions</option>
+          <option value="like-new">Like New</option>
+          <option value="excellent">Excellent</option>
+          <option value="good">Good</option>
+          <option value="fair">Fair</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Price Range</label>
+        <select class="filter-select" id="price-filter">
+          <option value="all">All Prices</option>
+          <option value="under-25">Under $25</option>
+          <option value="25-50">$25 - $50</option>
+          <option value="50-100">$50 - $100</option>
+          <option value="100-200">$100 - $200</option>
+          <option value="over-200">Over $200</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">Origin</label>
+        <select class="filter-select" id="origin-filter">
+          <option value="all">All Origins</option>
+          <option value="south-asia">South Asia</option>
+          <option value="southeast-asia">Southeast Asia</option>
+          <option value="africa">Africa</option>
+          <option value="latin-america">Latin America</option>
+          <option value="middle-east">Middle East</option>
+        </select>
+      </div>
+    </div>
+    <div class="search-bar">
+      <input type="text" class="search-input" id="search-input" placeholder="Search for handcrafted resale items...">
+      <button class="search-btn" id="search-btn">Search</button>
+    </div>
+  </div>
+
+  <h2 class="section-title">Featured Resale Items</h2>
+  <p class="section-subtitle">Preloved handcrafted treasures at great prices, each with its own unique story and heritage.</p>
+
+  <div class="card-grid" id="product-grid">
+    <div class="card" data-category="home-decor" data-condition="excellent" data-price="85" data-origin="south-asia">
+      <div class="card-img" style="background-image: url('water-pot.png')">
+        <span class="resale-badge">Resale</span>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">Vintage Copper Water Pot</h3>
+        <p class="card-price">$85.00</p>
+        <p class="card-original-price">Original: $120.00</p>
+        <p class="card-condition">Condition: Excellent</p>
+        <p class="card-seller">Listed by: Sarah Johnson</p>
+        <button class="btn btn-primary view-details">View Details</button>
+      </div>
+    </div>
+    <div class="card" data-category="textiles" data-condition="like-new" data-price="45" data-origin="southeast-asia">
+      <div class="card-img" style="background-image: url('scarf.png')">
+        <span class="resale-badge">Resale</span>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">Handwoven Silk Scarf</h3>
+        <p class="card-price">$45.00</p>
+        <p class="card-original-price">Original: $65.00</p>
+        <p class="card-condition">Condition: Like New</p>
+        <p class="card-seller">Listed by: Mark Thompson</p>
+        <button class="btn btn-primary view-details">View Details</button>
+      </div>
+    </div>
+    <div class="card" data-category="woodwork" data-condition="good" data-price="95" data-origin="africa">
+      <div class="card-img" style="background-image: url('wall-art.png')">
+        <span class="resale-badge">Resale</span>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">Carved Wooden Wall Art</h3>
+        <p class="card-price">$95.00</p>
+        <p class="card-original-price">Original: $150.00</p>
+        <p class="card-condition">Condition: Good</p>
+        <p class="card-seller">Listed by: Amelia Rodriguez</p>
+        <button class="btn btn-primary view-details">View Details</button>
+      </div>
+    </div>
+    <div class="card" data-category="pottery" data-condition="excellent" data-price="55" data-origin="latin-america">
+      <div class="card-img" style="background-image: url('ceramic-bowl.png')">
+        <span class="resale-badge">Resale</span>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">Glazed Ceramic Bowl Set</h3>
+        <p class="card-price">$55.00</p>
+        <p class="card-original-price">Original: $75.00</p>
+        <p class="card-condition">Condition: Excellent</p>
+        <p class="card-seller">Listed by: David Chen</p>
+        <button class="btn btn-primary view-details">View Details</button>
+      </div>
+    </div>
+    <div class="card" data-category="textiles" data-condition="like-new" data-price="40" data-origin="middle-east">
+      <div class="card-img" style="background-image: url('table-runner.png')">
+        <span class="resale-badge">Resale</span>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">Embroidered Table Runner</h3>
+        <p class="card-price">$40.00</p>
+        <p class="card-original-price">Original: $60.00</p>
+        <p class="card-condition">Condition: Like New</p>
+        <p class="card-seller">Listed by: Emily Wilson</p>
+        <button class="btn btn-primary view-details">View Details</button>
+      </div>
+    </div>
+    <div class="card" data-category="home-decor" data-condition="good" data-price="130" data-origin="south-asia">
+      <div class="card-img" style="background-image: url('brass-lamp.png')">
+        <span class="resale-badge">Resale</span>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">Brass Floor Lamp</h3>
+        <p class="card-price">$130.00</p>
+        <p class="card-original-price">Original: $200.00</p>
+        <p class="card-condition">Condition: Good</p>
+        <p class="card-seller">Listed by: Michael Kumar</p>
+        <button class="btn btn-primary view-details">View Details</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="how-it-works">
+    <h2 class="section-title">How Resale Works</h2>
+    <p class="section-subtitle">Our curated resale marketplace ensures authenticity, fair pricing, and sustainable practices.</p>
+    
+    <div class="steps-container">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3 class="step-title">List Your Item</h3>
+        <p class="step-description">Submit photos and details of your preloved artisanal item through our simple listing process.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3 class="step-title">AI Verification</h3>
+        <p class="step-description">Our AI technology verifies the item's authenticity, condition, and suggests a fair market value.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3 class="step-title">Connect & Sell</h3>
+        <p class="step-description">Once verified, your item appears on our marketplace, connecting you with interested buyers worldwide.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2 class="section-title">Resale Success Stories</h2>
+    
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <p class="testimonial-content">"I found a new home for my cherished hand-carved chess set that I no longer had space for. The process was seamless, and knowing it went to someone who appreciates artisanal craftsmanship made it even better."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background-image: url('rajesh.png')"></div>
+          <div class="author-info">
+            <h4>Robert Blackwell</h4>
+            <p>New York, USA</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-content">"As someone who collects handcrafted items, Heartisans Resale marketplace is a treasure trove. I've found pieces with incredible craftsmanship at great prices while supporting sustainable consumption."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background-image: url('rajesh.png')"></div>
+          <div class="author-info">
+            <h4>Sophia Martinez</h4>
+            <p>Barcelona, Spain</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-content">"The AI authentication gave me confidence when selling my collection of handwoven textiles. I received a fair price, and the buyer was delighted with their authenticity and quality."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background-image: url('rajesh.png')"></div>
+          <div class="author-info">
+            <h4>Naveen Patel</h4>
+            <p>Mumbai, India</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2 class="cta-title">Ready to Give Handcrafted Treasures a Second Life?</h2>
+    <p class="cta-text">Join our sustainable resale marketplace today and be part of the circular economy that celebrates artisanship and cultural heritage.</p>
+    <button class="btn btn-white" id="start-listing-btn">Start Listing</button>
+  </section>
+
+  <!-- List Item Modal -->
+  <div class="modal" id="listing-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>List Your Item</h2>
+      <p>Fill out the details below to list your handcrafted item for resale.</p>
+      
+      <form class="listing-form" id="listing-form">
+        <div class="form-group">
+          <label for="item-title">Item Title</label>
+          <input type="text" id="item-title" name="item-title" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="item-category">Category</label>
+          <select id="item-category" name="item-category" required>
+            <option value="">Select Category</option>
+            
